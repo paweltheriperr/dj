@@ -90,9 +90,9 @@ WSGI_APPLICATION = 'chessdbfen.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydatabase',
-        'USER': 'myuser',
-        'PASSWORD': 'mypassword',
+        'NAME': 'test_db',
+        'USER': 'admin',
+        'PASSWORD': 'password',
         'HOST': 'db',  # Nazwa hosta kontenera MySQL
         'PORT': '3306',  # Port MySQL
     }

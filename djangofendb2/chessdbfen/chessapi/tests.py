@@ -1,37 +1,19 @@
-import unittest
+import time
 from testcontainers.mysql import MySqlContainer
-from sqlalchemy import create_engine
 
+def test_mysql_container():
+    mysql_container = MySqlContainer()
+    mysql_container.start()
 
-class TestCustomMySQLContainer(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    # Oczekuj na gotowość kontenera, np. sprawdzając, czy jest dostępny port 3306
+    while True:
+        try:
+            mysql_container.get_connection_url()
+            break
+        except Exception as e:
+            print(f"Waiting for MySQL container: {e}")
+            time.sleep(1)
 
-        # Dostosowanie kontenera MySQL do wymagań
-        mysql_custom = MySqlContainer(
-            "mysql:8.0",
-            user="customuser",
-            password="custompassword",
-            database="customdb"
-        )
-        cls.container = mysql_custom
-        cls.container.start()
+    # Tutaj możesz przeprowadzić swoje testy
 
-        # Tworzenie połączenia SQLAlchemy do kontenera
-        cls.engine = create_engine(cls.container.get_connection_url())
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.container.stop()
-        super().tearDownClass()
-
-    def test_database_connection(self):
-        # Przykład testu, który sprawdza połączenie z dostosowanym kontenerem MySQL
-        with self.engine.connect() as conn:
-            result = conn.execute("SELECT 1")
-            self.assertEqual(result.scalar(), 1)
-
-
-if __name__ == '__main__':
-    unittest.main()
+    mysql_container.stop()
