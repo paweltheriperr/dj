@@ -28,9 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 CORS_ALLOW_ALL_ORIGINS = True
-# USTAWIENIA RDTWT
-RDTWT_POSTGRESQL_IMAGE  =  'postgres:13'
-TEST_RUNNER  =  'rdtwt.runner.PostgresDiscoverRunner'
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,7 +40,7 @@ INSTALLED_APPS = [
     'chessapi',
     'rest_framework',
     'corsheaders',
-    'rdtwt',
+
 
 ]
 CORS_ALLOWED_ORIGINS = [
@@ -89,19 +86,19 @@ WSGI_APPLICATION = 'chessdbfen.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-       #'ENGINE': 'django.db.backends.sqlite3',
-       #'NAME': BASE_DIR / 'db.sqlite3',
-        #domyślna
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mydatabase',
         'USER': 'myuser',
         'PASSWORD': 'mypassword',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'HOST': 'db',  # Nazwa hosta kontenera MySQL
+        'PORT': '3306',  # Port MySQL
     }
 }
+
+
 
 
 # Password validation
@@ -126,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pl-pl'
 
 TIME_ZONE = 'UTC'
 
