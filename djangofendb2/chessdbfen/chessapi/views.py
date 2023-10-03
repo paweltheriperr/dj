@@ -11,6 +11,7 @@ from .models import Fen
 # Serializer, który zamienia nasze książki na coś bardziej przystępnego - jak tłumaczenie książki na inny język.
 from .serializers import FenSerializer
 
+
 # Definiujemy widok, który pozwala na zapisywanie danych, ale tylko jeśli ktoś użyje metody POST.
 @api_view(['POST'])
 def save_fen(request):
@@ -26,6 +27,7 @@ def save_fen(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         # Jeśli tłumaczenie było beznadziejne, to mówimy o tym odwiedzającemu.
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 # Kolejny widok, tym razem do czytania danych.
 @api_view(['GET'])

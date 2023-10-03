@@ -2,7 +2,11 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "chessdbfen.settings")
 
+import django
+django.setup()
 
 def main():
     """Run administrative tasks."""
